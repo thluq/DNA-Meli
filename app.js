@@ -343,44 +343,47 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = '#FFE600';
     ctx.fillRect(0, 0, 1080, 60);
 
-    // Main Logo
-    ctx.textAlign = 'center';
-    if (loadedIcons['logo']) {
-      const logoWidth = 240;
-      const logoHeight = (logoWidth / loadedIcons['logo'].width) * loadedIcons['logo'].height;
-      ctx.drawImage(loadedIcons['logo'], 540 - logoWidth/2, 100, logoWidth, logoHeight);
-    } else {
-      ctx.fillStyle = '#333333';
-      ctx.font = 'bold 64px sans-serif';
-      ctx.fillText('DNA MELI', 540, 200);
-    }
+    // Note: Main Logo is drawn at the end now
 
     // User Name text
     ctx.fillStyle = '#333333';
     ctx.font = 'bold 36px sans-serif';
-    ctx.fillText(userName ? `${userName}, o seu DNA é:` : 'O seu DNA é:', 540, 270);
+    ctx.textAlign = 'center';
+    ctx.fillText(userName ? `${userName}, o seu DNA é:` : 'O seu DNA é:', 540, 150);
 
     // Profile Name (Principio)
     ctx.fillStyle = '#333333';
-    ctx.font = '900 44px sans-serif';
-    ctx.fillText(result.dominante.principio, 540, 340);
+    ctx.font = '900 48px sans-serif';
+    ctx.fillText(result.dominante.principio, 540, 220);
 
     // Archetype Name
     ctx.fillStyle = '#666';
     ctx.font = 'italic 40px sans-serif';
-    ctx.fillText(`"${result.dominante.nome}"`, 540, 400);
+    ctx.fillText(`"${result.dominante.nome}"`, 540, 280);
+
+    // Feedback Texts
+    ctx.fillStyle = '#555';
+    ctx.font = '28px sans-serif';
+    let textY = 340;
+    textY = fillWrappedText(ctx, result.dominante.descricao, 540, textY, 800, 36);
+    
+    textY += 20;
+    ctx.font = 'bold 28px sans-serif';
+    ctx.fillText('Sua maior força:', 540, textY);
+    ctx.font = '28px sans-serif';
+    textY = fillWrappedText(ctx, result.dominante.forca, 540, textY + 36, 800, 36);
 
     if (result.isHibrido) {
       ctx.fillStyle = '#333';
       ctx.font = 'bold 36px sans-serif';
-      ctx.fillText('& ' + result.secundario.principio, 540, 460);
+      ctx.fillText('& ' + result.secundario.principio, 540, textY + 40);
     }
 
     // Draw Radar
     const size = 600;
     const center = 540;
-    const cy = 800;
-    const radius = 250;
+    const cy = 840;
+    const radius = 200;
     const axes = ['usuario', 'beta', 'equipe', 'maximo', 'excelencia', 'empreendo'];
     const labels = ['Usuário', 'Beta', 'Equipe', 'Máximo', 'Excelência', 'Empreendo'];
 
@@ -413,9 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.lineTo(x, y);
       ctx.stroke();
 
-      const iconSize = 45;
-      const lx = center + (radius + 65) * Math.cos(angle) - iconSize / 2;
-      const ly = cy + (radius + 65) * Math.sin(angle) - iconSize / 2;
+      const iconSize = 120;
+      const lx = center + (radius + 80) * Math.cos(angle) - iconSize / 2;
+      const ly = cy + (radius + 80) * Math.sin(angle) - iconSize / 2;
       if (loadedIcons[axis]) {
         ctx.drawImage(loadedIcons[axis], lx, ly, iconSize, iconSize);
       }
@@ -443,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Top affinities text below radar
     ctx.fillStyle = '#333';
     ctx.font = 'bold 32px sans-serif';
-    let yPos = 1180;
+    let yPos = 1220;
     result.ranking.slice(0, 3).forEach(([key, val]) => {
       if (val > 0) {
         ctx.fillText(`${window.PROFILES[key].principio}: ${val}%`, 540, yPos);
@@ -451,7 +454,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Draw Main Logo at Bottom Right
+    if (loadedIcons['logo']) {
+      const logoWidth = 160;
+      const logoHeight = (logoWidth / loadedIcons['logo'].width) * loadedIcons['logo'].height;
+      ctx.drawImage(loadedIcons['logo'], 1080 - logoWidth - 40, 1350 - logoHeight - 40, logoWidth, logoHeight);
+    }
+
     return canvas.toDataURL('image/png');
+  }
+
+  // Utils for Canvas text wrapping
+  function fillWrappedText(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+    let currentY = y;
+    for (let i = 0; i < words.length; i++) {
+      const testLine = line + words[i] + ' ';
+      const metrics = ctx.measureText(testLine);
+      const testWidth = metrics.width;
+      if (testWidth > maxWidth && i > 0) {
+        ctx.fillText(line, x, currentY);
+        line = words[i] + ' ';
+        currentY += lineHeight;
+      } else {
+        line = testLine;
+      }
+    }
+    ctx.fillText(line, x, currentY);
+    return currentY + lineHeight;
   }
 
 });
