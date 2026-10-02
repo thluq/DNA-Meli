@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             title: 'Meu DNA MELI',
-            text: `Fiz o teste e meu DNA MELI é ${result.dominante.nome}!`,
+            text: `Fiz o teste e meu DNA MELI é "${result.dominante.principio}"!`,
             files: [file]
           });
         } else {
