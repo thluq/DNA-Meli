@@ -83,6 +83,12 @@ body {
   border-top: 6px solid var(--meli-yellow);
 }
 
+.start-card .main-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 24px;
+}
+
 .start-card h1 {
   font-size: 28px;
   font-weight: 900;

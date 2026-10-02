@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'equipe': 'assets/compitoemequipe.png',
     'maximo': 'assets/douomaximo.png',
     'excelencia': 'assets/executocomexcelencia.png',
-    'empreendo': 'assets/empreendoassumindoriscos.png'
+    'empreendo': 'assets/empreendoassumindoriscos.png',
+    'logo': 'assets/meli.png'
   };
 
   Object.entries(iconsPaths).forEach(([key, path]) => {
@@ -188,9 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = center + radius * Math.sin(angle);
       svg += `<line x1="${center}" y1="${center}" x2="${x}" y2="${y}" stroke="#eeeeee" stroke-width="1"/>`;
 
-      const iconSize = 40;
-      const lx = center + (radius + 28) * Math.cos(angle) - iconSize/2;
-      const ly = center + (radius + 28) * Math.sin(angle) - iconSize/2;
+      const iconSize = 45;
+      const lx = center + (radius + 28) * Math.cos(angle) - iconSize / 2;
+      const ly = center + (radius + 28) * Math.sin(angle) - iconSize / 2;
       svg += `<image href="${iconsPaths[axis]}" x="${lx}" y="${ly}" width="${iconSize}" height="${iconSize}"/>`;
     });
 
@@ -342,11 +343,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = '#FFE600';
     ctx.fillRect(0, 0, 1080, 60);
 
-    // Logo Text
-    ctx.fillStyle = '#333333';
-    ctx.font = 'bold 64px sans-serif';
+    // Main Logo
     ctx.textAlign = 'center';
-    ctx.fillText('DNA MELI', 540, 200);
+    if (loadedIcons['logo']) {
+      const logoWidth = 240;
+      const logoHeight = (logoWidth / loadedIcons['logo'].width) * loadedIcons['logo'].height;
+      ctx.drawImage(loadedIcons['logo'], 540 - logoWidth/2, 100, logoWidth, logoHeight);
+    } else {
+      ctx.fillStyle = '#333333';
+      ctx.font = 'bold 64px sans-serif';
+      ctx.fillText('DNA MELI', 540, 200);
+    }
 
     // User Name text
     ctx.fillStyle = '#333333';
@@ -406,9 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.lineTo(x, y);
       ctx.stroke();
 
-      const iconSize = 80;
-      const lx = center + (radius + 65) * Math.cos(angle) - iconSize/2;
-      const ly = cy + (radius + 65) * Math.sin(angle) - iconSize/2;
+      const iconSize = 45;
+      const lx = center + (radius + 65) * Math.cos(angle) - iconSize / 2;
+      const ly = cy + (radius + 65) * Math.sin(angle) - iconSize / 2;
       if (loadedIcons[axis]) {
         ctx.drawImage(loadedIcons[axis], lx, ly, iconSize, iconSize);
       }
