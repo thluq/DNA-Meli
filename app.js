@@ -342,14 +342,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Yellow Header
     ctx.fillStyle = '#FFE600';
-    ctx.fillRect(0, 0, 1080, 60);
+    ctx.fillRect(0, 0, 1080, 105); // Increased by 75%
 
     // Draw Melibar Logo on the top left
     if (loadedIcons['melibar']) {
-      // Let's constrain its height to fit the 60px bar, with some padding (e.g. 40px height)
-      const maxH = 40;
+      // Constrain its height to fit the 105px bar, with some padding (e.g. 75px height)
+      const maxH = 75;
       const w = (maxH / loadedIcons['melibar'].height) * loadedIcons['melibar'].width;
-      ctx.drawImage(loadedIcons['melibar'], 20, 10, w, maxH);
+      ctx.drawImage(loadedIcons['melibar'], 40, 15, w, maxH);
     }
 
     // Note: Main Logo is drawn at the end now
@@ -358,22 +358,22 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = '#333333';
     ctx.font = 'bold 36px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(userName ? `${userName}, o seu DNA é:` : 'O seu DNA é:', 540, 150);
+    ctx.fillText(userName ? `${userName}, o seu DNA é:` : 'O seu DNA é:', 540, 170);
 
     // Profile Name (Principio)
     ctx.fillStyle = '#333333';
     ctx.font = '900 48px sans-serif';
-    ctx.fillText(result.dominante.principio, 540, 220);
+    ctx.fillText(result.dominante.principio, 540, 240);
 
     // Archetype Name
     ctx.fillStyle = '#666';
     ctx.font = 'italic 40px sans-serif';
-    ctx.fillText(`"${result.dominante.nome}"`, 540, 280);
+    ctx.fillText(`"${result.dominante.nome}"`, 540, 300);
 
     // Feedback Texts
     ctx.fillStyle = '#555';
     ctx.font = '28px sans-serif';
-    let textY = 340;
+    let textY = 360;
     textY = fillWrappedText(ctx, result.dominante.descricao, 540, textY, 800, 36);
     
     textY += 20;
@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Draw Radar
     const size = 600;
     const center = 540;
-    const cy = 840;
+    const cy = 860;
     const radius = 200;
     const axes = ['usuario', 'beta', 'equipe', 'maximo', 'excelencia', 'empreendo'];
     const labels = ['Usuário', 'Beta', 'Equipe', 'Máximo', 'Excelência', 'Empreendo'];
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Top affinities text below radar
     ctx.fillStyle = '#333';
     ctx.font = 'bold 32px sans-serif';
-    let yPos = 1220;
+    let yPos = 1240;
     result.ranking.slice(0, 3).forEach(([key, val]) => {
       if (val > 0) {
         ctx.fillText(`${window.PROFILES[key].principio}: ${val}%`, 540, yPos);
