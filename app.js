@@ -333,23 +333,23 @@ document.addEventListener('DOMContentLoaded', () => {
   function drawCanvasShare(result) {
     const canvas = document.createElement('canvas');
     canvas.width = 1080;
-    canvas.height = 1350;
+    canvas.height = 1500;
     const ctx = canvas.getContext('2d');
 
     // Background
     ctx.fillStyle = '#f5f5f5';
-    ctx.fillRect(0, 0, 1080, 1350);
+    ctx.fillRect(0, 0, 1080, 1500);
 
     // Yellow Header
     ctx.fillStyle = '#FFE600';
-    ctx.fillRect(0, 0, 1080, 105); // Increased by 75%
+    ctx.fillRect(0, 0, 1080, 120);
 
     // Draw Melibar Logo on the top left
     if (loadedIcons['melibar']) {
-      // Constrain its height to fit the 105px bar, with some padding (e.g. 75px height)
-      const maxH = 75;
+      // Constrain its height to fit the 120px bar, with some padding (e.g. 80px height)
+      const maxH = 80;
       const w = (maxH / loadedIcons['melibar'].height) * loadedIcons['melibar'].width;
-      ctx.drawImage(loadedIcons['melibar'], 40, 15, w, maxH);
+      ctx.drawImage(loadedIcons['melibar'], 40, 20, w, maxH);
     }
 
     // Note: Main Logo is drawn at the end now
@@ -368,30 +368,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Archetype Name
     ctx.fillStyle = '#666';
     ctx.font = 'italic 40px sans-serif';
-    ctx.fillText(`"${result.dominante.nome}"`, 540, 300);
+    let textY = 300;
+    ctx.fillText(`"${result.dominante.nome}"`, 540, textY);
+
+    if (result.isHibrido) {
+      textY += 50;
+      ctx.fillStyle = '#333';
+      ctx.font = 'bold 36px sans-serif';
+      ctx.fillText('& ' + result.secundario.principio, 540, textY);
+    }
 
     // Feedback Texts
+    textY += 60;
     ctx.fillStyle = '#555';
     ctx.font = '28px sans-serif';
-    let textY = 360;
     textY = fillWrappedText(ctx, result.dominante.descricao, 540, textY, 800, 36);
     
-    textY += 20;
+    textY += 30;
     ctx.font = 'bold 28px sans-serif';
     ctx.fillText('Sua maior força:', 540, textY);
     ctx.font = '28px sans-serif';
     textY = fillWrappedText(ctx, result.dominante.forca, 540, textY + 36, 800, 36);
 
-    if (result.isHibrido) {
-      ctx.fillStyle = '#333';
-      ctx.font = 'bold 36px sans-serif';
-      ctx.fillText('& ' + result.secundario.principio, 540, textY + 40);
-    }
-
     // Draw Radar
     const size = 600;
     const center = 540;
-    const cy = 860;
+    const cy = 940;
     const radius = 200;
     const axes = ['usuario', 'beta', 'equipe', 'maximo', 'excelencia', 'empreendo'];
     const labels = ['Usuário', 'Beta', 'Equipe', 'Máximo', 'Excelência', 'Empreendo'];
@@ -455,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Top affinities text below radar
     ctx.fillStyle = '#333';
     ctx.font = 'bold 32px sans-serif';
-    let yPos = 1240;
+    let yPos = 1330;
     result.ranking.slice(0, 3).forEach(([key, val]) => {
       if (val > 0) {
         ctx.fillText(`${window.PROFILES[key].principio}: ${val}%`, 540, yPos);
