@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     'maximo': 'assets/douomaximo.png',
     'excelencia': 'assets/executocomexcelencia.png',
     'empreendo': 'assets/empreendoassumindoriscos.png',
-    'logo': 'assets/meli.png'
+    'logo': 'assets/meli.png',
+    'melibar': 'assets/melibar.png'
   };
 
   Object.entries(iconsPaths).forEach(([key, path]) => {
@@ -343,6 +344,14 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = '#FFE600';
     ctx.fillRect(0, 0, 1080, 60);
 
+    // Draw Melibar Logo on the top left
+    if (loadedIcons['melibar']) {
+      // Let's constrain its height to fit the 60px bar, with some padding (e.g. 40px height)
+      const maxH = 40;
+      const w = (maxH / loadedIcons['melibar'].height) * loadedIcons['melibar'].width;
+      ctx.drawImage(loadedIcons['melibar'], 20, 10, w, maxH);
+    }
+
     // Note: Main Logo is drawn at the end now
 
     // User Name text
@@ -453,13 +462,6 @@ document.addEventListener('DOMContentLoaded', () => {
         yPos += 50;
       }
     });
-
-    // Draw Main Logo at Bottom Right
-    if (loadedIcons['logo']) {
-      const logoWidth = 160;
-      const logoHeight = (logoWidth / loadedIcons['logo'].width) * loadedIcons['logo'].height;
-      ctx.drawImage(loadedIcons['logo'], 1080 - logoWidth - 40, 1350 - logoHeight - 40, logoWidth, logoHeight);
-    }
 
     return canvas.toDataURL('image/png');
   }

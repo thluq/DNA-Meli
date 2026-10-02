@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Quiz DNA MELI</title>
-  <link rel="icon" href="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadolibre/favicon.svg">
+  <link rel="icon"
+    href="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.21.22/mercadolibre/favicon.svg">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Modal Image Fallback -->
   <div id="modal-fallback" class="modal hidden">
@@ -19,7 +22,7 @@
   </div>
 
   <div id="app" class="container">
-    
+
     <!-- Screen: Start -->
     <section id="screen-start" class="screen active">
       <div class="card start-card">
@@ -33,10 +36,11 @@
           <img src="assets/executocomexcelencia.png" alt="Excelência">
           <img src="assets/empreendoassumindoriscos.png" alt="Empreendo">
         </div>
-        <p>São 12 situações do dia a dia da operação. Não tem resposta certa ou errada, apenas o que mais combina com você!</p>
+        <p>São 12 situações do dia a dia da operação. Não tem resposta certa ou errada, apenas o que mais combina com
+          você!</p>
         <input type="text" id="user-name" class="input-name" placeholder="Digite seu nome" required />
         <button id="btn-start" class="btn btn-primary mt-auto">Começar</button>
-        <div class="credits" style="margin-top: 24px; text-align: center; font-size: 10px; color: #999;">
+        <div class="credits" style="margin-top: 24px; text-align: center; font-size: 2px; color: #999;">
           <p>Criado por Thiago Lucas thiagoluc.goncalves@mercadolivre.com</p>
         </div>
       </div>
@@ -46,7 +50,9 @@
     <section id="screen-question" class="screen">
       <div class="header">
         <button id="btn-back" class="btn-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
           Voltar
         </button>
         <div class="progress-text"><span id="progress-text">1</span> de 12</div>
@@ -54,7 +60,7 @@
       <div class="progress-bar-bg">
         <div id="progress-bar" class="progress-bar-fill"></div>
       </div>
-      
+
       <div class="card question-card">
         <h2 id="question-text"></h2>
         <div id="options-container" class="options-container">
@@ -67,14 +73,14 @@
     <section id="screen-result" class="screen scrollable">
       <div class="card result-card">
         <h2 id="result-title" class="result-title">O seu DNA é:</h2>
-        
+
         <div id="hybrid-badge" class="badge hidden">Perfil Híbrido</div>
-        
+
         <div id="dominant-profile" class="profile-highlight">
           <h1 id="res-name">Nome</h1>
           <p id="res-principle" class="principle">Princípio</p>
           <p id="res-desc" class="desc">Descrição</p>
-          
+
           <div class="profile-details">
             <div class="detail-box">
               <strong>Sua maior força:</strong>
@@ -106,7 +112,12 @@
 
         <div class="actions">
           <button id="btn-share" class="btn btn-primary">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" />
+            </svg>
             Compartilhar resultado
           </button>
           <button id="btn-restart" class="btn btn-secondary">Refazer o quiz</button>
@@ -119,4 +130,5 @@
   <script src="data.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>
