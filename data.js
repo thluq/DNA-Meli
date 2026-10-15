@@ -5,7 +5,7 @@ window.QUESTIONS = [
     "opcoes": [
       { "texto": "Vejo qual área está mais atrasada e vou ajudar os colegas de lá.", "principio": "equipe" },
       { "texto": "Chamo o meus colegas para ajudar, com energia e bom humor, pra fecharmos juntos.", "principio": "maximo" },
-      { "texto": "Mantenho o ritmo e corretamente os processos, porque correria gera erro e acidente.", "principio": "excelencia" },
+      { "texto": "Mantenho o ritmo e sigo corretamente os processos, porque correria gera erro e acidente.", "principio": "excelencia" },
       { "texto": "Anoto o que gerou gargalo hoje e levo ao líder uma proposta pra não acontecer de novo.", "principio": "empreendo" }
     ]
   },
